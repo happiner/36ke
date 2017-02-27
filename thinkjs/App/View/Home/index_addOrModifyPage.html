@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>修改</title>
+    <link rel="stylesheet" type="text/css" href="/resource/css/common/common.css" media="all" />
+    <link rel="stylesheet" href="/resource/css/36detail.css"/>
+</head>
+<style type="text/css">
+    .detail_li{
+        margin-bottom: 15px;
+        text-align: center;
+    }
+</style>
+<body>
+<div class="container">
+    	<form action="/index/addOrModify?id=<%-articleDetail.ArticleID%>" method="POST" id="detailForm">
+        <ul class="items clearfix">
+            <li class="detail_li">
+                标题：<input type="text" class="w320" name="Title" value="<%-articleDetail.Title%>">
+                图片路径：<input type="text" name="PicURL" value="<%-articleDetail.PicURL%>">
+            </li>
+            <li class="detail_li">
+                <!-- 加载编辑器的容器 -->
+                <script id="ueContainer" type="text/plain"><%-articleDetail.Content%></script>
+                <textarea style="display: none;"  name="Content" id="Content"></textarea>
+            </li>
+            <li class="detail_li">
+                <input type="button" class="btn" id="save" value="保存"/>
+            </li>
+        </ul>
+        </form>
+</div>
+
+        <!-- 配置文件 -->
+        <script type="text/javascript" src="/resource/js/ueditor.config.js"></script>
+        <!-- 编辑器源码文件 -->
+        <script type="text/javascript" src="/resource/js/ueditor.all.js"></script>
+        <!-- 实例化编辑器 -->
+        <script type="text/javascript">
+            var ue = UE.getEditor('ueContainer');
+            
+            document.getElementById("save").onclick=function(){
+                document.getElementById("Content").innerHTML = ue.getContent();
+                document.getElementById("detailForm").submit();
+            };
+        </script>
+</body>
+</html>
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>newsDetail</title>
+    <script src="/resource/js/lib/react.js"></script>
+    <script src="/resource/js/lib/react-dom.js"></script>
+    <script src="/resource/js/lib/browser.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/resource/css/common/common.css" media="all" />
+    <link rel="stylesheet" href="/resource/css/36detail.css"/>
+</head>
+<body>
+<div id="new_main"></div>
+<script type="text/babel">
+           
+            var Img = React.createClass({
+            render:function(){
+                return <a href="index.html" className="top">
+                  <img src="/resource/img/logo.png" alt="a"/>
+                </a>
+            }
+           });
+           var InfoHeader = React.createClass({
+             render:function(){
+             return  <h1 className="new-title">
+             <%-articleDetail.Title%>
+             </h1>
+             }
+           });
+           var InfoTime = React.createClass({
+             render:function(){
+             return  <p className="user-time">
+             <a href="" className="36-user">简约</a>
+             &nbsp;•&nbsp;
+             <span>
+                <% 
+                        var dateObj=new Date(articleDetail.UpdatedDate),
+                            m = dateObj.getMonth()+1,d=dateObj.getDate(),minute = dateObj.getMinutes(),s=dateObj.getSeconds(),h=dateObj.getHours();
+                            month = m < 10 ? "0"+m : ""+m;
+                            day = d <10 ? "0"+d : ""+d;
+                    %>
+                    <%- dateObj.getFullYear() %>-<%- month %>-<%- day %>
+             </span>
+             &nbsp;•&nbsp;
+             <abbr title="">早期项目</abbr>
+             </p>
+             }
+           });
+           var InfoIntroduce = React.createClass({
+             render:function(){
+             return <div className="introduce">
+                亚洲还是中东？看起来已经有了选择。
+             </div>
+             }
+           });
+           var InfoImg = React.createClass({
+             render:function(){
+             return <div className="d-img">
+                <img src="/resource/img/<%-articleDetail.PicURL%>" alt=""/>
+             </div>
+             }
+           });
+           /*var InfoContent = React.createClass({
+             render:function(){
+             return <div className="d-Content">
+                    <%-articleDetail.Content%>
+             </div>
+             }
+           });*/
+             var SetNews = React.createClass({
+             render:function(){
+             return <div className="btn-set">
+                <a href="/index/addOrModifyPage?id=<%-articleDetail.ArticleID%>">编辑文章</a>
+             </div>
+             }
+           });
+
+           var FinalNew = React.createClass({
+            render:function(){
+                return <div className="container">
+
+                            <Img/>
+                             <InfoHeader/>
+                             <InfoTime/>
+                             <InfoIntroduce/>
+                             <InfoImg/>
+                             <div className="d-Content">
+                    <%-articleDetail.Content%>
+             </div>
+                              // <InfoContent/>
+                              <SetNews/>
+                        </div>
+            }
+           });
+
+            ReactDOM.render(
+            <FinalNew/>,
+                    document.getElementById('new_main')
+            );
+        </script>
+
+
+
+</body>
+</html>
